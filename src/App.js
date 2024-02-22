@@ -32,6 +32,11 @@ function App() {
   }
 }
 
+  const handleRemoveResults = () =>{
+    setCountry('')
+    setData([])
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -59,7 +64,13 @@ function App() {
       onClick={ handleRequest}
       >Request data</Button>
 
+      <Button 
+      variant="contained"  
+      disabled={data.length === 0? true :false}
+      onClick={ handleRemoveResults }
+      >Delete Reuslts</Button>
 
+<div style={{ fontSize : '1rem' }}>
       {
         data.length === 0 ? null : 
         (
@@ -70,7 +81,7 @@ function App() {
           })
           )
       }
-
+</div>
       </header>
     </div>
   );
