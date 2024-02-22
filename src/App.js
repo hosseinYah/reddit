@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 
 
 function App() {
@@ -58,21 +59,32 @@ function App() {
 
       </FormControl>
 
-      <Button 
+      <Grid container sx={{
+        justifyContent:'center'
+      }}
+      spacing={2}
+      >
+        <Grid item>
+        <Button 
       variant="contained"  
       disabled={country === ''? true :false}
       onClick={ handleRequest}
       >Request data</Button>
+        </Grid>
 
+        <Grid item>
       <Button 
       variant="contained"  
       disabled={data.length === 0? true :false}
       onClick={ handleRemoveResults }
       >Delete Reuslts</Button>
+        </Grid>
 
-<div style={{ fontSize : '1rem' }}>
+      </Grid>
+
+<div style={{ fontSize : '1rem', height:200, overflowY: 'scroll', margin:20, textAlign:'left', border:'2px solid', borderColor:'blue', padding:15, borderRadius:6}}>
       {
-        data.length === 0 ? null : 
+        data.length === 0 ? 'No results' : 
         (
           
           data.map((element, index) => 
