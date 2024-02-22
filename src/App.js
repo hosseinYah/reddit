@@ -60,6 +60,17 @@ function App() {
       >Request data</Button>
 
 
+      {
+        data.length === 0 ? null : 
+        (
+          
+          data.map((element, index) => 
+          { 
+            return <div key={index}>{element.data.title}</div>
+          })
+          )
+      }
+
       </header>
     </div>
   );
