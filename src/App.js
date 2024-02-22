@@ -4,18 +4,33 @@ import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { useState } from 'react';
-
+import Button from '@mui/material/Button';
 
 
 function App() {
 
   // Hooks
   const [country, setCountry] = useState('') 
+  const [data, setData] = useState([])
 
   const handleCountry = (event) => {
     setCountry(event.target.value)
     // console.log(event.target.value);
   }
+
+  const handleRequest = async () => {
+    let link = `https://api.reddit.com/r/${country}.json`
+
+   try{
+    const response = await fetch(link);
+    let json = await response.json();
+    console.log(json.data.children)
+    let data_to_display = json.data.children; 
+    setData(data_to_display)
+   }catch (error){
+   console.log(error)
+  }
+}
 
   return (
     <div className="App">
@@ -33,9 +48,17 @@ function App() {
         > 
           <MenuItem value={'mexico'}>México</MenuItem>
           <MenuItem value={'finland'}>Finaland</MenuItem>
+
         </Select>
-        
+
       </FormControl>
+
+      <Button 
+      variant="contained"  
+      disabled={country === ''? true :false}
+      onClick={ handleRequest}
+      >Request data</Button>
+
 
       </header>
     </div>
